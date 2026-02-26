@@ -1,0 +1,358 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Emmy Cils — Noir & Or Élégance */
+  --background: 36 25% 97%;
+  --foreground: 0 0% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 4%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 4%;
+  --primary: 0 0% 4%;
+  --primary-foreground: 36 25% 97%;
+  --secondary: 30 12% 95%;
+  --secondary-foreground: 0 0% 4%;
+  --muted: 30 12% 95%;
+  --muted-foreground: 12 5% 40%;
+  --accent: 33 37% 64%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 30 12% 89%;
+  --input: 30 12% 93%;
+  --ring: 33 37% 64%;
+  --radius: 8px;
+}
+
+@theme inline {
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Gold palette */
+  --color-gold: #c8a97e;
+  --color-gold-light: #d4b896;
+  --color-gold-dark: #b8956e;
+
+  /* Surface tones */
+  --color-warm: #f5f3f0;
+  --color-cream: #faf9f7;
+
+  --radius-sm: max(calc(var(--radius) - 4px), 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-cream text-foreground;
+  }
+
+  ::selection {
+    background: rgba(200, 169, 126, 0.25);
+    color: #0a0a0a;
+  }
+
+  /* Focus states for accessibility */
+  :focus-visible {
+    outline: 2px solid #c8a97e;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid #c8a97e;
+    outline-offset: 2px;
+  }
+}
+
+/* Decorative gold divider */
+.gold-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c8a97e, transparent);
+}
+
+/* Noise grain overlay */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Dot pattern for dark sections */
+.dot-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* ── CTA Animations ── */
+
+/* Pulsing gold glow on buttons */
+.cta-glow {
+  animation: cta-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(200, 169, 126, 0.3), 0 0 60px rgba(200, 169, 126, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(200, 169, 126, 0.5), 0 0 80px rgba(200, 169, 126, 0.2); }
+}
+
+/* Shimmer sweep across button */
+.cta-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.cta-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.25) 55%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(100%); }
+}
+
+/* Gold border glow for CTA sections */
+.cta-border-glow {
+  position: relative;
+}
+.cta-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 30%, rgba(200, 169, 126, 0.4) 50%, transparent 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-rotate 4s linear infinite;
+}
+
+@keyframes border-rotate {
+  0% { background: linear-gradient(0deg, transparent 30%, rgba(200, 169, 126, 0.4) 50%, transparent 70%); }
+  25% { background: linear-gradient(90deg, transparent 30%, rgba(200, 169, 126, 0.4) 50%, transparent 70%); }
+  50% { background: linear-gradient(180deg, transparent 30%, rgba(200, 169, 126, 0.4) 50%, transparent 70%); }
+  75% { background: linear-gradient(270deg, transparent 30%, rgba(200, 169, 126, 0.4) 50%, transparent 70%); }
+  100% { background: linear-gradient(360deg, transparent 30%, rgba(200, 169, 126, 0.4) 50%, transparent 70%); }
+}
+
+/* Floating sparkle animation */
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-80px) scale(0.5); opacity: 0; }
+}
+
+.sparkle-float > span {
+  animation: float-up 3s ease-in-out infinite;
+}
+.sparkle-float > span:nth-child(2) { animation-delay: 0.8s; }
+.sparkle-float > span:nth-child(3) { animation-delay: 1.6s; }
+.sparkle-float > span:nth-child(4) { animation-delay: 2.4s; }
+
+/* ── Premium Card Hover Effects ── */
+
+/* 3D lift with progressive gold shadow */
+.card-lift {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 12px rgba(200, 169, 126, 0.08),
+    0 12px 32px rgba(200, 169, 126, 0.06),
+    0 24px 60px rgba(200, 169, 126, 0.04);
+}
+
+/* Gold shine sweep on image hover */
+.image-shine {
+  position: relative;
+  overflow: hidden;
+}
+.image-shine::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(200, 169, 126, 0.15) 45%,
+    rgba(255, 240, 220, 0.1) 50%,
+    rgba(200, 169, 126, 0.15) 55%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+.image-shine:hover::before {
+  transform: translateX(120%);
+}
+
+/* ── Gold Underline Draw ── */
+.gold-underline-draw {
+  position: relative;
+  display: inline-block;
+}
+.gold-underline-draw::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, #c8a97e, #d4b896);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gold-underline-draw:hover::after {
+  width: 100%;
+}
+
+/* ── Staggered Entrance ── */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: stagger-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.16s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.24s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.32s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.40s; }
+
+@keyframes stagger-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Gold Pulse Ring ── */
+.gold-pulse-ring {
+  position: relative;
+}
+.gold-pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 1.5px solid rgba(200, 169, 126, 0.3);
+  animation: ring-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ring-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.04); opacity: 0.7; }
+}
+
+/* ── Breathing Glow (for icons/badges) ── */
+.breathe-glow {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(200, 169, 126, 0.2)); }
+  50% { filter: drop-shadow(0 0 12px rgba(200, 169, 126, 0.5)); }
+}
+
+/* ── Promo Card Pulse (border glow) ── */
+.promo-card-pulse {
+  animation: promo-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes promo-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(200, 169, 126, 0),
+      0 8px 40px rgba(0, 0, 0, 0.25);
+    border-color: rgba(200, 169, 126, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 20px 4px rgba(200, 169, 126, 0.2),
+      0 8px 40px rgba(0, 0, 0, 0.25);
+    border-color: rgba(200, 169, 126, 0.6);
+  }
+}
+
+/* Badge blink */
+.promo-badge-blink {
+  animation: badge-blink 2s ease-in-out infinite;
+}
+
+@keyframes badge-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .cta-glow,
+  .cta-shimmer::after,
+  .sparkle-float > span,
+  .gold-pulse-ring::before,
+  .breathe-glow,
+  .card-lift,
+  .image-shine::before,
+  .promo-card-pulse,
+  .promo-badge-blink {
+    animation: none !important;
+    transition: none !important;
+  }
+}

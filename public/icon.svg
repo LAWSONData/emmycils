@@ -1,0 +1,32 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="180" rx="40" fill="#0a0a0a"/>
+  <!-- Subtle gold glow -->
+  <circle cx="90" cy="88" r="50" fill="#c8a97e" opacity="0.06"/>
+  <!-- Eyelash strokes — fanned from a central base -->
+  <g stroke="#c8a97e" stroke-linecap="round" fill="none">
+    <!-- Base lid line -->
+    <path d="M38 100 Q90 72 142 100" stroke-width="3.5"/>
+    <!-- Lower subtle lid -->
+    <path d="M52 104 Q90 114 128 104" stroke-width="1.8" opacity="0.35"/>
+    <!-- Lash 1 (leftmost) -->
+    <path d="M48 96 Q42 72 36 54" stroke-width="2.8"/>
+    <!-- Lash 2 -->
+    <path d="M58 90 Q54 66 50 46" stroke-width="2.6"/>
+    <!-- Lash 3 -->
+    <path d="M68 85 Q66 60 64 40" stroke-width="2.5"/>
+    <!-- Lash 4 -->
+    <path d="M78 82 Q78 56 78 36" stroke-width="2.4"/>
+    <!-- Lash 5 (center) -->
+    <path d="M90 80 Q90 54 92 34" stroke-width="2.5"/>
+    <!-- Lash 6 -->
+    <path d="M102 82 Q104 56 106 36" stroke-width="2.4"/>
+    <!-- Lash 7 -->
+    <path d="M112 85 Q116 60 120 40" stroke-width="2.5"/>
+    <!-- Lash 8 -->
+    <path d="M122 90 Q128 66 134 46" stroke-width="2.6"/>
+    <!-- Lash 9 (rightmost) -->
+    <path d="M132 96 Q138 72 146 54" stroke-width="2.8"/>
+  </g>
+  <!-- "E" lettermark -->
+  <text x="90" y="148" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="36" fill="#c8a97e" letter-spacing="2">E</text>
+</svg>

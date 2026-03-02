@@ -86,9 +86,9 @@ export default function FormationsPage() {
     }
   }
 
-  // Featured formation = Certification Pro (last one)
-  const featured = formations[formations.length - 1]
-  const otherFormations = formations.slice(0, -1)
+  // Featured formation = Formation Technique Niveau 2 (seule formation active)
+  const featured = formations[0]
+  const otherFormations: Formation[] = [] // Autres formations commentées pour l'instant
 
   const steps = [
     {
@@ -152,10 +152,10 @@ export default function FormationsPage() {
             className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-8 sm:mt-12"
           >
             {[
-              { icon: Layers, value: '5', label: 'Formations' },
-              { icon: Clock, value: '98h', label: 'de contenu' },
-              { icon: FileText, value: '19', label: 'PDFs inclus' },
-              { icon: Play, value: '23', label: 'Vidéos' },
+              { icon: Layers, value: '1', label: 'Formation' },
+              { icon: Clock, value: '22', label: 'leçons vidéo' },
+              { icon: BookOpen, value: '2', label: 'modules' },
+              { icon: Play, value: '22', label: 'vidéos' },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -195,8 +195,8 @@ export default function FormationsPage() {
                     Formation phare
                   </span>
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide uppercase px-3 py-1.5 rounded-full border border-white/20 text-white/70">
-                    <Shield size={11} />
-                    Certifiante
+                    <Sparkles size={11} />
+                    Niveau ELITE
                   </span>
                 </div>
 
@@ -251,7 +251,7 @@ export default function FormationsPage() {
                         className="cta-shimmer cta-glow w-full sm:w-auto bg-gold hover:bg-gold-dark text-white px-8 sm:px-10 py-4 h-auto text-[13px] sm:text-sm tracking-[0.08em] uppercase rounded-full transition-all duration-300 font-semibold"
                       >
                         <GraduationCap size={17} className="mr-2" />
-                        Obtenir la Certification
+                        Accéder à la Formation
                       </Button>
                     </div>
                   </div>
@@ -290,128 +290,130 @@ export default function FormationsPage() {
       </section>
 
       {/* ─── Other Formations Grid ─── */}
-      <section className="py-10 sm:py-14 lg:py-20 px-6 lg:px-8 bg-warm">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-center mb-8 sm:mb-12 lg:mb-16"
-          >
-            <p className="text-gold text-[12px] sm:text-[13px] tracking-[0.2em] uppercase font-medium mb-3">
-              Par niveau
-            </p>
-            <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-foreground">
-              Toutes nos Formations
-            </h2>
-          </motion.div>
+      {otherFormations.length > 0 && (
+        <section className="py-10 sm:py-14 lg:py-20 px-6 lg:px-8 bg-warm">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
+            >
+              <p className="text-gold text-[12px] sm:text-[13px] tracking-[0.2em] uppercase font-medium mb-3">
+                Par niveau
+              </p>
+              <h2 className="font-playfair text-2xl sm:text-3xl md:text-4xl text-foreground">
+                Toutes nos Formations
+              </h2>
+            </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
-            {otherFormations.map((formation, i) => {
-              const style = levelStyle(formation.level)
-              return (
-                <motion.div
-                  key={formation.id}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.55, delay: i * 0.08 }}
-                >
-                  <MagneticCard className="h-full" intensity={3}>
-                    <Card className="card-lift h-full bg-white border border-border hover:border-gold/40 group flex flex-col overflow-hidden">
-                      {/* Gold accent top bar */}
-                      <div className="h-1 bg-gradient-to-r from-gold/60 via-gold to-gold/60" />
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+              {otherFormations.map((formation, i) => {
+                const style = levelStyle(formation.level)
+                return (
+                  <motion.div
+                    key={formation.id}
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.55, delay: i * 0.08 }}
+                  >
+                    <MagneticCard className="h-full" intensity={3}>
+                      <Card className="card-lift h-full bg-white border border-border hover:border-gold/40 group flex flex-col overflow-hidden">
+                        {/* Gold accent top bar */}
+                        <div className="h-1 bg-gradient-to-r from-gold/60 via-gold to-gold/60" />
 
-                      <div className="p-5 sm:p-6 lg:p-7 flex-grow flex flex-col">
-                        {/* Header: badge + title + price */}
-                        <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-5">
-                          <div className="flex items-center justify-between gap-3">
-                            <span
-                              className={`inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium tracking-wide uppercase px-2.5 py-1 rounded-full border ${style.bg}`}
-                            >
-                              <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
-                              {formation.levelLabel}
+                        <div className="p-5 sm:p-6 lg:p-7 flex-grow flex flex-col">
+                          {/* Header: badge + title + price */}
+                          <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-5">
+                            <div className="flex items-center justify-between gap-3">
+                              <span
+                                className={`inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium tracking-wide uppercase px-2.5 py-1 rounded-full border ${style.bg}`}
+                              >
+                                <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
+                                {formation.levelLabel}
+                              </span>
+                              <span className="font-playfair text-2xl sm:text-3xl text-gold font-bold">
+                                {formation.priceDisplay}
+                              </span>
+                            </div>
+
+                            <h3 className="font-playfair font-bold text-lg sm:text-xl lg:text-2xl text-foreground leading-tight">
+                              {formation.title}
+                            </h3>
+
+                            <p className="text-gold/80 text-sm italic">
+                              {formation.subtitle}
+                            </p>
+                          </div>
+
+                          {/* Description */}
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-4 sm:mb-5">
+                            {formation.description}
+                          </p>
+
+                          {/* Meta row */}
+                          <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
+                            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
+                              <Clock size={12} className="text-gold" />
+                              {formation.duration}
                             </span>
-                            <span className="font-playfair text-2xl sm:text-3xl text-gold font-bold">
-                              {formation.priceDisplay}
+                            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
+                              <BookOpen size={12} className="text-gold" />
+                              {formation.modulesCount} modules
+                            </span>
+                            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
+                              <FileText size={12} className="text-gold" />
+                              {formation.includes.pdfs.length} PDFs
+                            </span>
+                            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
+                              <Play size={12} className="text-gold" />
+                              {formation.includes.videos.length} vidéos
                             </span>
                           </div>
 
-                          <h3 className="font-playfair font-bold text-lg sm:text-xl lg:text-2xl text-foreground leading-tight">
-                            {formation.title}
-                          </h3>
+                          {/* Highlights — show 4 max */}
+                          <div className="space-y-2 mb-6 flex-grow">
+                            <p className="text-[10px] sm:text-[11px] font-semibold text-foreground/70 uppercase tracking-[0.1em]">
+                              Points clés
+                            </p>
+                            <ul className="space-y-2">
+                              {formation.highlights.slice(0, 4).map((h) => (
+                                <li
+                                  key={h}
+                                  className="flex items-start gap-2"
+                                >
+                                  <CheckCircle
+                                    size={13}
+                                    className="text-gold mt-0.5 flex-shrink-0"
+                                  />
+                                  <span className="text-muted-foreground text-[13px] leading-relaxed">
+                                    {h}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
 
-                          <p className="text-gold/80 text-sm italic">
-                            {formation.subtitle}
-                          </p>
+                          {/* CTA */}
+                          <Button
+                            onClick={() => handleBuy(formation)}
+                            className="cta-shimmer w-full bg-gold hover:bg-gold-dark text-white h-12 sm:h-13 text-[12px] sm:text-sm tracking-[0.06em] uppercase rounded-full transition-all duration-300 hover:shadow-[0_4px_25px_rgba(200,169,126,0.4)] font-semibold"
+                          >
+                            <ShoppingCart size={16} className="mr-2" />
+                            Acheter — {formation.priceDisplay}
+                          </Button>
                         </div>
-
-                        {/* Description */}
-                        <p className="text-muted-foreground text-sm leading-relaxed mb-4 sm:mb-5">
-                          {formation.description}
-                        </p>
-
-                        {/* Meta row */}
-                        <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
-                          <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
-                            <Clock size={12} className="text-gold" />
-                            {formation.duration}
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
-                            <BookOpen size={12} className="text-gold" />
-                            {formation.modulesCount} modules
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
-                            <FileText size={12} className="text-gold" />
-                            {formation.includes.pdfs.length} PDFs
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs px-2.5 py-1.5 rounded-full bg-warm text-muted-foreground">
-                            <Play size={12} className="text-gold" />
-                            {formation.includes.videos.length} vidéos
-                          </span>
-                        </div>
-
-                        {/* Highlights — show 4 max */}
-                        <div className="space-y-2 mb-6 flex-grow">
-                          <p className="text-[10px] sm:text-[11px] font-semibold text-foreground/70 uppercase tracking-[0.1em]">
-                            Points clés
-                          </p>
-                          <ul className="space-y-2">
-                            {formation.highlights.slice(0, 4).map((h) => (
-                              <li
-                                key={h}
-                                className="flex items-start gap-2"
-                              >
-                                <CheckCircle
-                                  size={13}
-                                  className="text-gold mt-0.5 flex-shrink-0"
-                                />
-                                <span className="text-muted-foreground text-[13px] leading-relaxed">
-                                  {h}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* CTA */}
-                        <Button
-                          onClick={() => handleBuy(formation)}
-                          className="cta-shimmer w-full bg-gold hover:bg-gold-dark text-white h-12 sm:h-13 text-[12px] sm:text-sm tracking-[0.06em] uppercase rounded-full transition-all duration-300 hover:shadow-[0_4px_25px_rgba(200,169,126,0.4)] font-semibold"
-                        >
-                          <ShoppingCart size={16} className="mr-2" />
-                          Acheter — {formation.priceDisplay}
-                        </Button>
-                      </div>
-                    </Card>
-                  </MagneticCard>
-                </motion.div>
-              )
-            })}
+                      </Card>
+                    </MagneticCard>
+                  </motion.div>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ─── Comment ça marche ─── */}
       <section className="py-12 sm:py-16 lg:py-20 px-6 lg:px-8 bg-cream">
@@ -559,7 +561,7 @@ export default function FormationsPage() {
                 </motion.div>
               ))}
             </div>
-            <span><CountUp end={5} duration={1} /> formations · PDFs + Vidéos inclus</span>
+            <span><CountUp end={22} duration={1} /> vidéos · Formation complète</span>
           </motion.div>
         </motion.div>
       </section>

@@ -9,43 +9,20 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-const BASE_URL = process.env.FORMATION_CONTENT_BASE_URL || 'https://storage.emmycils.fr/formations'
-
-export async function sendFormationEmail({
+/**
+ * Email envoyé après achat avec le lien d'accès à la formation
+ */
+export async function sendFormationAccessEmail({
   to,
   formation,
+  accessUrl,
   sessionId,
 }: {
   to: string
   formation: Formation
+  accessUrl: string
   sessionId: string
 }) {
-  const pdfLinks = formation.includes.pdfs
-    .map(
-      (pdf) =>
-        `<tr>
-          <td style="padding:8px 0;">
-            <a href="${BASE_URL}/${formation.slug}/${pdf.filename}" style="color:#c8a97e;text-decoration:none;font-size:14px;">
-              📄 ${pdf.name}
-            </a>
-          </td>
-        </tr>`
-    )
-    .join('')
-
-  const videoLinks = formation.includes.videos
-    .map(
-      (video) =>
-        `<tr>
-          <td style="padding:8px 0;">
-            <a href="${BASE_URL}/${formation.slug}/${video.filename}" style="color:#c8a97e;text-decoration:none;font-size:14px;">
-              🎬 ${video.name}
-            </a>
-          </td>
-        </tr>`
-    )
-    .join('')
-
   const html = `
 <!DOCTYPE html>
 <html lang="fr">
@@ -79,7 +56,7 @@ export async function sendFormationEmail({
               <h1 style="font-family:Georgia,serif;font-size:24px;color:#0a0a0a;margin:0 0 16px;">Merci pour votre achat !</h1>
               <p style="font-size:15px;color:#666;line-height:1.6;margin:0;">
                 Vous avez acquis la formation <strong style="color:#0a0a0a;">${formation.title}</strong>.
-                Retrouvez ci-dessous l'ensemble de votre contenu de formation.
+                Cliquez sur le bouton ci-dessous pour accéder à votre espace de formation.
               </p>
             </td>
           </tr>
@@ -91,43 +68,57 @@ export async function sendFormationEmail({
             </td>
           </tr>
 
-          <!-- PDFs Section -->
+          <!-- Access Button -->
           <tr>
-            <td style="padding:30px 40px 10px;">
-              <h2 style="font-family:Georgia,serif;font-size:18px;color:#0a0a0a;margin:0 0 16px;">Documents PDF</h2>
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#faf9f7;border-radius:6px;padding:16px;">
-                <tr><td style="padding:16px;">
-                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                    ${pdfLinks}
-                  </table>
-                </td></tr>
-              </table>
+            <td style="padding:40px 40px;text-align:center;">
+              <a href="${accessUrl}" style="display:inline-block;background-color:#c8a97e;color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;text-decoration:none;padding:18px 48px;border-radius:50px;letter-spacing:1px;text-transform:uppercase;">
+                Accéder à ma formation
+              </a>
+              <p style="font-size:13px;color:#999;margin:20px 0 0;line-height:1.6;">
+                Ce lien est personnel et vous donne accès à l'intégralité de votre formation.<br>
+                <strong style="color:#666;">Ne le partagez pas.</strong>
+              </p>
             </td>
           </tr>
 
-          <!-- Videos Section -->
+          <!-- Formation Details -->
           <tr>
-            <td style="padding:20px 40px 10px;">
-              <h2 style="font-family:Georgia,serif;font-size:18px;color:#0a0a0a;margin:0 0 16px;">Vidéos de Formation</h2>
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#faf9f7;border-radius:6px;padding:16px;">
-                <tr><td style="padding:16px;">
-                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                    ${videoLinks}
-                  </table>
-                </td></tr>
+            <td style="padding:0 40px 30px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#faf9f7;border-radius:8px;">
+                <tr>
+                  <td style="padding:24px;">
+                    <h3 style="font-family:Georgia,serif;font-size:16px;color:#0a0a0a;margin:0 0 12px;">Contenu inclus</h3>
+                    <p style="font-size:14px;color:#666;margin:0;line-height:1.8;">
+                      ✓ ${formation.includes.videos.length} vidéos de formation<br>
+                      ✓ ${formation.modulesCount} modules complets<br>
+                      ✓ Suivi de progression personnalisé<br>
+                      ✓ Accès illimité pendant 1 an
+                    </p>
+                  </td>
+                </tr>
               </table>
             </td>
           </tr>
 
           <!-- Order Reference -->
           <tr>
-            <td style="padding:30px 40px;">
+            <td style="padding:0 40px 30px;">
               <div style="height:1px;background:linear-gradient(90deg,transparent,#c8a97e,transparent);margin-bottom:20px;"></div>
               <p style="font-size:12px;color:#999;margin:0;">
                 Référence commande : <span style="color:#666;">${sessionId}</span>
               </p>
               <p style="font-size:12px;color:#999;margin:4px 0 0;">
                 Formation : ${formation.title} — ${formation.priceDisplay}
+              </p>
+            </td>
+          </tr>
+
+          <!-- Backup Link -->
+          <tr>
+            <td style="padding:0 40px 30px;">
+              <p style="font-size:11px;color:#999;margin:0;line-height:1.6;">
+                Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :<br>
+                <a href="${accessUrl}" style="color:#c8a97e;word-break:break-all;">${accessUrl}</a>
               </p>
             </td>
           </tr>
@@ -154,7 +145,7 @@ export async function sendFormationEmail({
   await transporter.sendMail({
     from: `"Emmy Cils Formations" <${process.env.GMAIL_USER}>`,
     to,
-    subject: `Votre formation : ${formation.title} — Emmy Cils`,
+    subject: `Accès à votre formation : ${formation.title} — Emmy Cils`,
     html,
   })
 }

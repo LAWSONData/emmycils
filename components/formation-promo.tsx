@@ -52,8 +52,7 @@ export function FormationPromo() {
     setVisible(false)
   }
 
-  const featured = formations[formations.length - 1] // Certification Pro
-  const starter = formations[0] // Fondamentaux
+  const formation = formations[formations.length - 1]
 
   if (isFormationsPage) return null
 
@@ -93,51 +92,38 @@ export function FormationPromo() {
 
               {/* Title */}
               <h3 className="font-playfair font-bold text-base sm:text-lg text-white leading-tight mb-1.5">
-                Formations disponibles
+                {formation.title}
               </h3>
               <p className="text-white/50 text-xs sm:text-sm leading-relaxed mb-4">
-                Devenez experte en extensions de cils avec nos formations complètes.
+                {formation.subtitle}
               </p>
 
-              {/* Two formation previews */}
+              {/* Formation preview */}
               <div className="space-y-2.5 mb-4">
-                {/* Starter */}
-                <div className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08]">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/15 flex items-center justify-center flex-shrink-0">
-                      <GraduationCap size={14} className="text-emerald-400" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-white text-xs sm:text-sm font-medium truncate">{starter.title}</p>
-                      <p className="text-white/40 text-[10px] sm:text-[11px]">{starter.levelLabel} · {starter.modulesCount} modules</p>
-                    </div>
-                  </div>
-                  <span className="text-gold font-playfair font-bold text-sm sm:text-base flex-shrink-0">
-                    {starter.priceDisplay}
-                  </span>
-                </div>
-
-                {/* Featured / Pro */}
                 <div className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl bg-gold/[0.08] border border-gold/20">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0">
-                      <Sparkles size={14} className="text-gold" />
+                      <GraduationCap size={14} className="text-gold" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-white text-xs sm:text-sm font-medium truncate">{featured.title}</p>
-                      <p className="text-gold/60 text-[10px] sm:text-[11px]">{featured.levelLabel} · {featured.modulesCount} modules</p>
+                      <p className="text-white text-xs sm:text-sm font-medium truncate">
+                        {formation.title}
+                      </p>
+                      <p className="text-gold/60 text-[10px] sm:text-[11px]">
+                        {formation.levelLabel} · {formation.duration}
+                      </p>
                     </div>
                   </div>
                   <span className="text-gold font-playfair font-bold text-sm sm:text-base flex-shrink-0">
-                    {featured.priceDisplay}
+                    {formation.priceDisplay}
                   </span>
                 </div>
               </div>
 
               {/* CTA */}
-              <Link href="/formations" onClick={dismiss}>
+              <Link href="/formations/technique-niveau-2" onClick={dismiss}>
                 <button className="cta-shimmer w-full flex items-center justify-center gap-2 py-3 bg-gold hover:bg-gold-dark text-white text-xs sm:text-sm font-semibold tracking-[0.05em] uppercase rounded-full transition-all duration-300 hover:shadow-[0_4px_20px_rgba(200,169,126,0.4)]">
-                  Voir toutes les formations
+                  En savoir plus
                   <ArrowRight size={14} />
                 </button>
               </Link>

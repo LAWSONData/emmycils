@@ -93,7 +93,10 @@ export default function HomePage() {
       <Navbar />
 
       {/* ─── Hero ─── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+        aria-labelledby="home-hero-heading"
+      >
         {/* Background image */}
         <Image
           src="/hero-lashes-bw.jpg"
@@ -126,7 +129,10 @@ export default function HomePage() {
               className="mx-auto h-px bg-gradient-to-r from-transparent via-gold to-transparent"
             />
 
-            <h1 className="font-playfair text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-[1.05] tracking-tight drop-shadow-[0_2px_30px_rgba(0,0,0,0.4)]">
+            <h1
+              id="home-hero-heading"
+              className="font-playfair text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-[1.05] tracking-tight drop-shadow-[0_2px_30px_rgba(0,0,0,0.4)]"
+            >
               <motion.span
                 initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -168,7 +174,7 @@ export default function HomePage() {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center pt-2 sm:pt-4"
             >
-              <Link href="/services" className="w-full sm:w-auto">
+              <Link href="/services" className="w-full sm:w-auto" aria-label="Voir les prestations extensions de cils">
                 <Button className="cta-shimmer cta-glow w-full sm:w-auto bg-gold hover:bg-gold-dark text-white px-8 sm:px-12 py-3.5 sm:py-4 h-auto text-[13px] sm:text-sm tracking-[0.08em] uppercase rounded-full transition-all duration-300 font-semibold">
                   <Sparkles size={16} className="mr-2" />
                   Découvrir nos Services
@@ -178,6 +184,7 @@ export default function HomePage() {
                 onClick={openCalendly}
                 variant="outline"
                 className="w-full sm:w-auto border-2 border-white/30 text-white hover:bg-white/10 hover:border-gold/60 px-8 sm:px-12 py-3.5 sm:py-4 h-auto text-[13px] sm:text-sm tracking-[0.08em] uppercase rounded-full transition-all duration-300 bg-transparent font-semibold"
+                aria-label="Réserver un rendez-vous extensions de cils"
               >
                 Réserver un RDV
                 <ArrowRight size={16} className="ml-2" />
@@ -371,6 +378,7 @@ export default function HomePage() {
             <Button
               onClick={openCalendly}
               className="cta-shimmer cta-glow w-full sm:w-auto bg-gold hover:bg-gold-dark text-white px-8 sm:px-14 py-4 sm:py-5 h-auto text-[13px] sm:text-sm tracking-[0.08em] uppercase rounded-full transition-all duration-300 font-semibold"
+              aria-label="Réserver une consultation personnalisée Emmy Cils"
             >
               <Sparkles size={16} className="mr-2" />
               Réserver Maintenant
@@ -379,6 +387,7 @@ export default function HomePage() {
               onClick={openStripe}
               variant="outline"
               className="w-full sm:w-auto border-2 border-white/20 text-white hover:bg-white/5 hover:border-gold/50 px-8 sm:px-14 py-4 sm:py-5 h-auto text-[13px] sm:text-sm tracking-[0.08em] uppercase rounded-full transition-all duration-300 bg-transparent font-semibold"
+              aria-label="Payer un acompte de 20 euros"
             >
               Payer un Acompte (20€)
             </Button>

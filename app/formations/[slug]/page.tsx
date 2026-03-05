@@ -7,6 +7,8 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { CommentsSection } from '@/components/comments-section'
+import { FormationTestimonials } from '@/components/formation-testimonials'
 import {
   Clock,
   BookOpen,
@@ -36,79 +38,85 @@ const programmeComplet = [
   },
   {
     title: 'Leçon 3 — Cycle de croissance et rétention',
-    description: 'Quatre phases, détection, adaptation de la pose, explication cliente.',
+    description:
+      'Les 4 phases du cycle, détection, adaptation de la pose, explication cliente pour améliorer la rétention.',
   },
   {
     title: 'Leçon 4 — Réactions allergiques et brûlures chimiques',
-    description: 'Prévenir, reconnaître, gérer professionnellement.',
+    description: 'Comment prévenir, reconnaître et gérer les réactions de manière professionnelle.',
   },
   {
     title: 'Leçon 5 — Produits de préparation',
     description:
-      'Shampoing, démaquillant, primer, cleanser, booster, ordre, rôle, erreurs à éviter.',
+      'Shampoing, démaquillant, primer, cleanser, booster : ordre, rôle de chaque produit et erreurs à éviter.',
   },
   {
     title: 'Leçon 6 — Maîtrise de la colle',
     description:
-      'Composition, types, hygromètre, temps de séchage, quantité idéale, conservation, fréquence de changement.',
+      'Composition, types de colle, hygromètre, temps de séchage, quantité idéale, conservation, fréquence de changement.',
   },
   {
     title: 'Leçon 7 — Choisir ses extensions',
-    description: 'Épaisseurs, longueurs, sécurité, adaptation au cil naturel.',
+    description:
+      'Épaisseurs, longueurs, courbures : sécurité et adaptation au cil naturel pour un résultat durable.',
   },
   {
     title: 'Leçon 8 — Réaliser une pose harmonieuse',
-    description: 'Angle, direction, distance paupière, tenue des pinces, exercices mousse et mannequin.',
+    description:
+      'Angle, direction, distance paupière, tenue des pinces, exercices sur mousse et mannequin.',
   },
   {
     title: 'Leçon 9 — Pose sur mesure et mapping',
-    description: 'Mapping, longueurs, ligne parfaite, harmonie.',
+    description:
+      'Mapping, choix des longueurs, construction d’une ligne parfaite et harmonieuse adaptée à chaque œil.',
   },
   {
     title: 'Leçon 10 — Les effets',
-    description: 'Naturel, œil de biche, écureuil, poupée.',
+    description:
+      'Naturel, œil de biche, écureuil, poupée : comment choisir et adapter les effets au visage de la cliente.',
   },
   {
     title: 'Leçon 11 — Posture',
     description:
-      'Position du corps, placement des mains, confort cliente, prévention des douleurs.',
+      'Position du corps, placement des mains, confort de la cliente, prévention des tensions et douleurs.',
   },
   {
     title: 'Leçon 12 — Matériel',
-    description: 'Tout le nécessaire, checklist complète.',
+    description: 'Tout le nécessaire, checklist complète pour travailler de façon professionnelle.',
   },
   {
     title: 'Leçon 13 — Préparation de la pose',
     description:
-      'Nettoyage, isolation, patchs et sparadrap, mapping, isolation deux pinces, démarrage, gain de temps.',
+      'Nettoyage, isolation, patchs et sparadrap, mapping, isolation à deux pinces, démarrage efficace.',
   },
   {
     title: 'Leçon 14 — Étude de cas sur modèle humain',
     description:
-      "Analyse de l’œil, courbure, choix des longueurs et courbures avant de poser.",
+      'Analyse de l’œil, courbure, choix des longueurs et courbures avant de poser pour un résultat cohérent.',
   },
   {
     title: 'Leçon 15 — Technique signature de validation des longueurs',
     description:
-      'Valider la longueur avec la cliente avant de démarrer pour sécuriser le rendu final et la satisfaction.',
+      'Valider les longueurs avec la cliente avant de démarrer pour sécuriser le rendu final et la satisfaction.',
   },
   {
     title: 'Leçon 16 — Coins internes et externes',
-    description: 'Sparadrap, application, accès, précision, gain de temps.',
+    description:
+      'Utilisation du sparadrap, accès aux zones difficiles, précision et gain de temps sur les coins.',
   },
   {
     title: 'Leçon 17 — Travailler les cils afro',
     description:
-      'Isolation, orientation, surface d’accroche, rétention, rendu adapté aux cils afro.',
+      'Isolation, orientation, surface d’accroche, stratégie pour une bonne rétention sur cils afro.',
   },
   {
     title: 'Leçon 18 — Dépose propre et sécurisée',
-    description: 'Produits, étapes, précautions, finition.',
+    description: 'Produits, étapes, précautions et finition pour une dépose sans abîmer les cils naturels.',
   },
   {
-    title: 'Leçon 19 — Bonus pose volume',
+    title: 'Leçon 19 — Bonus pose volume avec bouquets préfaits',
     description:
-      'Volume avec bouquets préfaits, choix du type, matière, logique de sélection.',
+      'Introduction au volume avec bouquets préfaits, choix du type, de la matière et logique de sélection.',
   },
 ]
 
@@ -120,11 +128,15 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
     notFound()
   }
 
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [instagram, setInstagram] = useState('')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleCheckout = async () => {
-    if (!email || !formation) return
+    if (!email || !firstName || !lastName || !formation) return
 
     setLoading(true)
     try {
@@ -134,6 +146,10 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
         body: JSON.stringify({
           formationId: formation.id,
           customerEmail: email,
+          customerFirstName: firstName,
+          customerLastName: lastName,
+          customerPhone: phone,
+          customerInstagram: instagram,
         }),
       })
 
@@ -230,7 +246,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm px-3 py-1.5 rounded-full bg-warm text-muted-foreground">
                   <CreditCard size={13} className="text-gold" />
-                  300€
+                  {formation.priceDisplay}
                 </span>
               </div>
 
@@ -248,7 +264,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
                       Accès complet à la formation
                     </p>
                     <p className="text-[11px] text-muted-foreground mt-1">
-                      Paiement sécurisé · Certificat inclus · Prix 300€
+                      Paiement sécurisé · Certificat inclus · Prix {formation.priceDisplay}
                     </p>
                   </div>
                   <div className="hidden sm:flex flex-col items-end text-xs text-muted-foreground">
@@ -264,6 +280,39 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
                 </div>
 
                 <div className="space-y-3">
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="detail-first-name"
+                        className="text-sm font-medium text-foreground"
+                      >
+                        Prénom
+                      </label>
+                      <Input
+                        id="detail-first-name"
+                        placeholder="Ton prénom"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="h-11 border-border focus:border-gold focus:ring-gold/20 rounded-lg"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="detail-last-name"
+                        className="text-sm font-medium text-foreground"
+                      >
+                        Nom
+                      </label>
+                      <Input
+                        id="detail-last-name"
+                        placeholder="Ton nom"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="h-11 border-border focus:border-gold focus:ring-gold/20 rounded-lg"
+                      />
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
                     <label
                       htmlFor="detail-email"
@@ -278,15 +327,49 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter' && email) handleCheckout()
+                        if (e.key === 'Enter' && email && firstName && lastName) handleCheckout()
                       }}
                       className="h-11 border-border focus:border-gold focus:ring-gold/20 rounded-lg"
                     />
                   </div>
 
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="detail-phone"
+                        className="text-sm font-medium text-foreground"
+                      >
+                        Téléphone (optionnel)
+                      </label>
+                      <Input
+                        id="detail-phone"
+                        type="tel"
+                        placeholder="+33..."
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="h-11 border-border focus:border-gold focus:ring-gold/20 rounded-lg"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="detail-instagram"
+                        className="text-sm font-medium text-foreground"
+                      >
+                        Instagram (optionnel)
+                      </label>
+                      <Input
+                        id="detail-instagram"
+                        placeholder="@toncompte"
+                        value={instagram}
+                        onChange={(e) => setInstagram(e.target.value)}
+                        className="h-11 border-border focus:border-gold focus:ring-gold/20 rounded-lg"
+                      />
+                    </div>
+                  </div>
+
                   <Button
                     onClick={handleCheckout}
-                    disabled={!email || loading}
+                    disabled={!email || !firstName || !lastName || loading}
                     className="cta-shimmer w-full bg-gold hover:bg-gold-dark text-white h-11 sm:h-12 text-[13px] sm:text-sm tracking-[0.06em] uppercase rounded-full transition-all duration-300 hover:shadow-[0_4px_25px_rgba(200,169,126,0.45)] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? (
@@ -497,31 +580,34 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
           </section>
 
           {/* Programme complet */}
-          <section className="space-y-6" id="section-programme">
+          <section
+            className="space-y-6 bg-[#0a0a0a] rounded-3xl px-6 sm:px-8 py-8 sm:py-10 text-white"
+            id="section-programme"
+          >
             <div className="space-y-2">
-              <h3 className="font-playfair text-2xl sm:text-3xl text-foreground">
+              <h3 className="font-playfair text-2xl sm:text-3xl text-white">
                 Le programme complet
               </h3>
-              <p className="text-sm text-muted-foreground max-w-2xl">
+              <p className="text-sm text-white/70 max-w-2xl">
                 19 leçons progressives pour t’emmener de la compréhension des bases jusqu’aux
                 techniques avancées de satisfaction cliente et de volume avec bouquets préfaits.
               </p>
             </div>
-            <div className="bg-white rounded-2xl border border-border p-5 sm:p-6">
-              <ol className="space-y-3 sm:space-y-4">
+            <div className="bg-white/5 rounded-2xl border border-white/10 p-5 sm:p-6">
+              <ol className="grid md:grid-cols-2 gap-4 sm:gap-5">
                 {programmeComplet.map((item, index) => (
                   <li
                     key={item.title}
-                    className="flex items-start gap-3 sm:gap-4"
+                    className="flex items-start gap-3 sm:gap-4 rounded-xl border border-white/15 bg-white/[0.04] p-3 sm:p-4"
                   >
                     <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gold/10 text-gold text-xs sm:text-sm font-semibold flex items-center justify-center">
                       {index + 1}
                     </div>
-                    <div>
-                      <p className="text-sm sm:text-base text-foreground font-medium">
+                    <div className="space-y-1">
+                      <p className="text-sm sm:text-base text-white font-medium">
                         {item.title}
                       </p>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                      <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -530,6 +616,9 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
               </ol>
             </div>
           </section>
+
+          {/* Témoignages de participantes */}
+          <FormationTestimonials />
 
           {/* Certificat & accès */}
           <section className="grid md:grid-cols-2 gap-6">
@@ -547,7 +636,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
                 <li>• Accès immédiat après paiement</li>
                 <li>• Tu avances à ton rythme</li>
                 <li>• Certificat inclus</li>
-                <li>• Prix 300€</li>
+                <li>• Prix {formation.priceDisplay}</li>
               </ul>
             </div>
           </section>
@@ -617,7 +706,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm px-3 py-1.5 rounded-full bg-white/10 text-white">
                 <CreditCard size={13} className="text-gold" />
-                300€
+                {formation.priceDisplay}
               </span>
             </div>
             <Button
@@ -628,6 +717,13 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
               <ArrowRight size={16} />
             </Button>
           </section>
+
+          {/* Avis sur la formation */}
+          <CommentsSection
+            type="formation"
+            targetId={slug}
+            title="Avis sur la formation"
+          />
         </div>
       </main>
 

@@ -35,7 +35,14 @@ export async function POST(request: NextRequest) {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
-    const { formationId, customerEmail } = session.metadata || {}
+    const {
+      formationId,
+      customerEmail,
+      customerFirstName,
+      customerLastName,
+      customerPhone,
+      customerInstagram,
+    } = session.metadata || {}
 
     if (formationId && customerEmail) {
       const formation = getFormationById(formationId)
@@ -51,6 +58,10 @@ export async function POST(request: NextRequest) {
             .insert({
               access_token: accessToken,
               email: customerEmail,
+              first_name: customerFirstName || null,
+              last_name: customerLastName || null,
+              phone: customerPhone || null,
+              instagram: customerInstagram || null,
               formation_id: formationId,
               stripe_session_id: session.id,
             })

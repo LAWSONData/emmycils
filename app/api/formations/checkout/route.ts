@@ -6,7 +6,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(request: NextRequest) {
   try {
-    const { formationId, customerEmail } = await request.json()
+    const {
+      formationId,
+      customerEmail,
+      customerFirstName,
+      customerLastName,
+      customerPhone,
+      customerInstagram,
+    } = await request.json()
 
     if (!formationId || !customerEmail) {
       return NextResponse.json(
@@ -46,6 +53,10 @@ export async function POST(request: NextRequest) {
         formationId: formation.id,
         formationTitle: formation.title,
         customerEmail,
+        customerFirstName: customerFirstName || '',
+        customerLastName: customerLastName || '',
+        customerPhone: customerPhone || '',
+        customerInstagram: customerInstagram || '',
       },
     })
 

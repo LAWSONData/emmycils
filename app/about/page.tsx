@@ -295,6 +295,73 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Certifications gallery */}
+      <section className="py-10 sm:py-14 lg:py-20 px-6 lg:px-8 bg-warm/80">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10 sm:mb-14">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-gold text-[13px] tracking-[0.2em] uppercase mb-3 font-medium"
+            >
+              Reconnaissance & diplômes
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-playfair text-2xl sm:text-3xl md:text-4xl text-foreground"
+            >
+              Mes certifications en images
+            </motion.h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+              Quelques moments importants de mon parcours, lorsque j&apos;ai reçu des
+              certifications et diplômes qui valident mon expertise dans les extensions de cils.
+            </p>
+            <LashDivider className="mt-6" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+            {[
+              { src: '/pic1.jpeg', label: 'Remise de certification 1' },
+              { src: '/pic2.jpeg', label: 'Remise de certification 2' },
+              { src: '/pic3.jpeg', label: 'Remise de certification 3' },
+            ].map((photo, index) => (
+              <motion.div
+                key={photo.src}
+                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.12 }}
+              >
+                <Card className="card-lift overflow-hidden bg-white/95 border border-border/80">
+                  <div className="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+                    <Image
+                      src={photo.src}
+                      alt={photo.label}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent pointer-events-none" />
+                  </div>
+                  <div className="px-4 py-4 sm:px-5 sm:py-5">
+                    <p className="text-xs text-gold tracking-[0.18em] uppercase mb-1">
+                      Certification
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {photo.label}
+                    </p>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Values */}
       <section className="py-12 sm:py-16 lg:py-24 px-6 lg:px-8 bg-cream">
         <div className="max-w-6xl mx-auto">

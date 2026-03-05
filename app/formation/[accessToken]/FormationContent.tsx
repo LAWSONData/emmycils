@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, GraduationCap, CheckCircle } from 'lucide-react'
+import { ArrowLeft, GraduationCap, CheckCircle, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { VideoPlayer } from '@/components/formation-player/VideoPlayer'
 import { VideoList } from '@/components/formation-player/VideoList'
@@ -40,6 +40,11 @@ export function FormationContent({
   const currentVideoProgress = progress.find(
     (p) => p.video_filename === currentVideo
   )
+
+  const currentResources =
+    currentVideo && formation.includes.pdfs.length > 0
+      ? formation.includes.pdfs.filter((pdf) => pdf.videoFilename === currentVideo)
+      : []
 
   const completedCount = progress.filter((p) => p.completed).length
   const overallProgress = formation.includes.videos.length > 0
@@ -186,8 +191,8 @@ export function FormationContent({
                   onEnded={handleVideoEnded}
                 />
 
-                {/* Info vidéo actuelle */}
-                <div className="bg-white/5 rounded-xl p-4 sm:p-5 border border-white/10">
+                {/* Info vidéo actuelle + ressources */}
+                <div className="bg-white/5 rounded-xl p-4 sm:p-5 border border-white/10 space-y-3">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h2 className="font-playfair text-lg text-white mb-1">
@@ -204,6 +209,30 @@ export function FormationContent({
                       </div>
                     )}
                   </div>
+
+                  {currentResources.length > 0 && (
+                    <div className="pt-2 border-t border-white/10">
+                      <p className="text-white/60 text-xs uppercase tracking-[0.18em] mb-2">
+                        Ressources téléchargeables
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {currentResources.map((pdf) => (
+                          <a
+                            key={pdf.filename}
+                            href={`${videoBaseUrl}/${formation.slug}/${pdf.filename}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-3 py-1.5 text-xs text-white/80 hover:border-gold hover:bg-gold/10 transition-colors"
+                          >
+                            <FileText size={12} className="text-gold" />
+                            <span className="truncate max-w-[200px] sm:max-w-[260px]">
+                              {pdf.name}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </>
             )}

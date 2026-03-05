@@ -11,7 +11,7 @@ export type Formation = {
   duration: string
   modulesCount: number
   includes: {
-    pdfs: { name: string; filename: string }[]
+    pdfs: { name: string; filename: string; videoFilename?: string }[]
     videos: { name: string; filename: string }[]
   }
   highlights: string[]
@@ -177,7 +177,28 @@ export const formations: Formation[] = [
     duration: '19 leçons',
     modulesCount: 2,
     includes: {
-      pdfs: [],
+      pdfs: [
+        { name: 'Module 0 — Matériel & espace de travail (support)', filename: 'Module 0 L1.pdf', videoFilename: 'Module 0 L1.mp4' },
+        { name: 'Module 0 — Introduction (support)', filename: 'Module 0 L2.pdf', videoFilename: 'Module 0 L2.mp4' },
+        { name: 'Leçon 1 — Les fondamentaux (support PDF)', filename: 'Module 1 Introduction.pdf', videoFilename: 'Module 1 Introduction.mp4' },
+        { name: 'Leçon 2 — Contre-indications (support PDF)', filename: 'Module 1 L1.pdf', videoFilename: 'Module 1 L1.mp4' },
+        { name: 'Leçon 3 — Cycle de croissance & rétention (support PDF)', filename: 'Module 1 L2.pdf', videoFilename: 'Module 1 L2.mp4' },
+        { name: 'Leçon 4 — Préparation & produits (support PDF)', filename: 'Module 1 L3.pdf', videoFilename: 'Module 1 L3.mp4' },
+        { name: 'Leçon 5 — Produits de préparation (support PDF)', filename: 'Module 1 L4.pdf', videoFilename: 'Module 1 L4.mp4' },
+        { name: 'Leçon 6 — Maîtrise de la colle (support PDF)', filename: 'Module 1 L5.pdf', videoFilename: 'Module 1 L5.mp4' },
+        { name: 'Leçon 7 — Choisir ses extensions (support PDF)', filename: 'Module 1 L6.pdf', videoFilename: 'Module 1 L6.mp4' },
+        { name: 'Leçon 8 — Pose harmonieuse (support PDF)', filename: 'Module 1 L7.pdf', videoFilename: 'Module 1 L7.mp4' },
+        { name: 'Leçon 9 — Pose sur mesure & mapping (support PDF)', filename: 'Module 1 L8.pdf', videoFilename: 'Module 1 L8.mp4' },
+        { name: 'Leçon 10 — Effets & design du regard (support 1)', filename: 'Module 1 L10 1.pdf', videoFilename: 'Module 1 L10.mp4' },
+        { name: 'Leçon 10 — Effets & design du regard (support 2)', filename: 'Module 1 L10 2.pdf', videoFilename: 'Module 1 L10.mp4' },
+        { name: 'Leçon 11 — Posture & confort (support PDF)', filename: 'Module 1 L2.pdf', videoFilename: 'Module 1 L11.mp4' },
+        { name: 'Leçon 12 — Matériel (support PDF)', filename: 'Module 1 L3.pdf', videoFilename: 'Module 1 L12.mp4' },
+        { name: 'Leçon 13 — Préparation de la pose (support PDF)', filename: 'Module 1 L4.pdf', videoFilename: 'Module 1 L13.mp4' },
+        { name: 'Leçon 14 — Étude de cas modèle (support PDF)', filename: 'Module 1 L5.pdf', videoFilename: 'Module 1 L14.mp4' },
+        { name: 'Leçon 16 — Coins internes & externes (support PDF)', filename: 'Module 1 L6.pdf', videoFilename: 'Module 1 L16.mp4' },
+        { name: 'Leçon 17 — Cils afro (support PDF)', filename: 'Module 1 L7.pdf', videoFilename: 'Module 1 L17.mp4' },
+        { name: 'Leçon 18 — Dépose propre & sécurisée (support PDF)', filename: 'Module 1 L8.pdf', videoFilename: 'Module 1 L18.mp4' },
+      ],
       videos: [
         { name: 'Introduction Générale', filename: 'Introduction Generale.mp4' },
         { name: 'MODULE 0 – Matériel & espace de travail ELITE', filename: 'Module 0 L1.mp4' },

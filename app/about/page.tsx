@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Award, ShieldCheck, Gem, Sparkles, Heart, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { LashDivider, CountUp, GoldenParticles, FloatingElement, LineReveal } from '@/components/animations'
 
@@ -101,20 +102,13 @@ export default function AboutPage() {
               className="lg:col-span-2"
             >
               <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-warm border border-border">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-3">
-                    <motion.div
-                      initial={{ scale: 0, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
-                      className="w-16 h-16 mx-auto rounded-full border border-gold/30 flex items-center justify-center"
-                    >
-                      <span className="font-playfair text-2xl text-gold">E</span>
-                    </motion.div>
-                    <p className="text-muted-foreground text-sm">Photo Emmy</p>
-                  </div>
-                </div>
+                <Image
+                  src="/Emmypic.jpg"
+                  alt="Emmy"
+                  fill
+                  className="object-cover"
+                  priority
+                />
                 {/* Decorative gold corners with draw animation */}
                 <motion.div
                   initial={{ opacity: 0 }}

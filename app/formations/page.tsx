@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
@@ -86,7 +87,7 @@ export default function FormationsPage() {
     }
   }
 
-  // Featured formation = Formation Technique Niveau 2 (seule formation active)
+  // Featured formation = FORMATION AVANCÉE POSE CLASSIQUE EN LIGNE (seule formation active)
   const featured = formations[0]
   const otherFormations: Formation[] = [] // Autres formations commentées pour l'instant
 
@@ -153,7 +154,7 @@ export default function FormationsPage() {
           >
             {[
               { icon: Layers, value: '1', label: 'Formation' },
-              { icon: Clock, value: '22', label: 'leçons vidéo' },
+              { icon: Clock, value: '19', label: 'leçons vidéo' },
               { icon: BookOpen, value: '2', label: 'modules' },
               { icon: Play, value: '22', label: 'vidéos' },
             ].map((stat, i) => (
@@ -246,13 +247,14 @@ export default function FormationsPage() {
                           {featured.priceDisplay}
                         </span>
                       </div>
-                      <Button
-                        onClick={() => handleBuy(featured)}
-                        className="cta-shimmer cta-glow w-full sm:w-auto bg-gold hover:bg-gold-dark text-white px-8 sm:px-10 py-4 h-auto text-[13px] sm:text-sm tracking-[0.08em] uppercase rounded-full transition-all duration-300 font-semibold"
-                      >
-                        <GraduationCap size={17} className="mr-2" />
-                        Accéder à la Formation
-                      </Button>
+                      <Link href={`/formations/${featured.slug}`}>
+                        <Button
+                          className="cta-shimmer cta-glow w-full sm:w-auto bg-gold hover:bg-gold-dark text-white px-8 sm:px-10 py-4 h-auto text-[13px] sm:text-sm tracking-[0.08em] uppercase rounded-full transition-all duration-300 font-semibold"
+                        >
+                          <GraduationCap size={17} className="mr-2" />
+                          En savoir plus
+                        </Button>
+                      </Link>
                     </div>
                   </div>
 

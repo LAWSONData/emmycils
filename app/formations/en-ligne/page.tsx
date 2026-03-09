@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
@@ -29,9 +30,11 @@ import {
   Zap,
   Shield,
   RefreshCw,
+  GraduationCap,
 } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { GoldenParticles } from '@/components/animations'
+import { formations } from '@/lib/formations'
 
 const formationsEnLigne = [
   {
@@ -102,6 +105,8 @@ export default function FormationsEnLignePage() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
 
+  const mainFormation = formations[formations.length - 1]
+
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -109,6 +114,7 @@ export default function FormationsEnLignePage() {
 
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 100])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
   const handleBuy = (formation: typeof formationsEnLigne[0]) => {
     setSelectedFormation(formation)
@@ -146,9 +152,9 @@ export default function FormationsEnLignePage() {
       <Navbar />
 
       {/* Hero Section - Modern Digital */}
-      <section ref={heroRef} className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
         {/* Background */}
-        <motion.div style={{ y: heroY }} className="absolute inset-0">
+        <motion.div style={{ y: heroY, scale: heroScale }} className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0f0d0a] to-[#0a0a0a]" />
 
           {/* Animated grid */}
@@ -276,12 +282,18 @@ export default function FormationsEnLignePage() {
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2"
+            className="flex flex-col items-center gap-3"
           >
-            <span className="text-white/30 text-xs tracking-widest uppercase">Découvrir</span>
-            <div className="w-px h-8 bg-gradient-to-b from-gold to-transparent" />
+            <span className="text-white/30 text-[11px] tracking-[0.2em] uppercase">Découvrir</span>
+            <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-1 h-2 bg-gold rounded-full"
+              />
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -304,6 +316,82 @@ export default function FormationsEnLignePage() {
             </h2>
           </motion.div>
 
+          {/* Carte principale : formation en ligne réelle */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            className="mb-16"
+          >
+            <div className="relative rounded-3xl overflow-hidden bg-[#0a0a0a] text-white shadow-[0_20px_60px_rgba(0,0,0,0.4)] border border-gold/20">
+              <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-purple-500/10 opacity-70" />
+              <div className="relative p-8 sm:p-10 lg:p-12 grid lg:grid-cols-3 gap-10 items-center">
+                <div className="lg:col-span-2 space-y-5">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-gold/30 text-[11px] tracking-[0.18em] uppercase">
+                    <Monitor size={14} className="text-gold" />
+                    Formation 100% en ligne
+                  </div>
+                  <h3 className="font-playfair text-3xl sm:text-4xl">
+                    {mainFormation.title}
+                  </h3>
+                  <p className="text-gold-light text-sm italic">
+                    {mainFormation.subtitle}
+                  </p>
+                  <p className="text-sm sm:text-base text-white/70 max-w-2xl">
+                    {mainFormation.description}
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-white/5 text-white/70">
+                      <Clock size={12} className="text-gold" />
+                      {mainFormation.duration}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-white/5 text-white/70">
+                      <BookOpen size={12} className="text-gold" />
+                      {mainFormation.modulesCount} modules
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-white/5 text-white/70">
+                      <Play size={12} className="text-gold" />
+                      {mainFormation.includes.videos.length} vidéos HD
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-white/5 text-white/70">
+                      <GraduationCap size={12} className="text-gold" />
+                      Certificat inclus
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="text-right">
+                    <p className="text-xs uppercase tracking-[0.16em] text-white/40 mb-1">
+                      Accès complet
+                    </p>
+                    <p className="font-playfair text-4xl text-gold">
+                      {mainFormation.priceDisplay}
+                    </p>
+                    <p className="text-[11px] text-white/40">
+                      Paiement unique · Accès illimité
+                    </p>
+                  </div>
+                  <ul className="space-y-2 text-sm text-white/70">
+                    {mainFormation.highlights.slice(0, 3).map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle size={14} className="text-gold mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={`/formations/${mainFormation.slug}`}>
+                    <Button className="w-full h-12 rounded-2xl text-sm tracking-[0.08em] uppercase font-semibold cta-shimmer bg-gold hover:bg-gold-dark text-white inline-flex items-center justify-center gap-2">
+                      <GraduationCap size={16} />
+                      En savoir plus
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Autres parcours en ligne (teasing / à venir) */}
           <div className="grid lg:grid-cols-3 gap-8">
             {formationsEnLigne.map((formation, i) => (
               <motion.div

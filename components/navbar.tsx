@@ -39,7 +39,7 @@ export function Navbar() {
   const formationsSubLinks = [
     { href: '/formations/presentiel', label: 'Présentiel' },
     { href: '/formations/en-ligne', label: 'En ligne' },
-    { href: '/formations/elite', label: 'Elite' },
+    { href: '/formations/elite', label: 'Programme Elite' },
   ]
 
   const gallerySubLinks = [

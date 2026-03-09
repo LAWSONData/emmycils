@@ -315,20 +315,22 @@ export default function AboutPage() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="font-playfair text-2xl sm:text-3xl md:text-4xl text-foreground"
             >
-              Mes certifications en images
+              Mes certifications
             </motion.h2>
             <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
-              Quelques moments importants de mon parcours, lorsque j&apos;ai reçu des
-              certifications et diplômes qui valident mon expertise dans les extensions de cils.
+              Quelques moments clés de mon parcours, entre la Belgique, Paris et la Russie, lors de remises
+              de certifications en Volume Russe, Mega Volume, symétrie du regard, effets créatifs, pose de
+              couleurs et initiation à la pose d&apos;extensions de cils, qui valident mon expertise internationale.
             </p>
             <LashDivider className="mt-6" />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-8">
             {[
-              { src: '/pic1.jpeg', label: 'Remise de certification 1' },
-              { src: '/pic2.jpeg', label: 'Remise de certification 2' },
-              { src: '/pic3.jpeg', label: 'Remise de certification 3' },
+              { src: '/pic1.jpeg', label: 'Volume Russe Perfectionnement - Belgique' },
+              { src: '/pic2.jpeg', label: 'Mega Volume & Symétrie du regard - Paris' },
+              { src: '/pic3.jpeg', label: 'Initiation à la pose d’extensions de cils - Paris' },
+              { src: '/pic4.jpeg', label: 'Effets créatifs & pose de couleurs - Russie' },
             ].map((photo, index) => (
               <motion.div
                 key={photo.src}

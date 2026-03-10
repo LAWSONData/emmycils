@@ -4,7 +4,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Award, ShieldCheck, Gem, Sparkles, Heart, ArrowRight } from 'lucide-react'
+import { Award, ShieldCheck, Gem, Sparkles, Heart, ArrowRight, GraduationCap, BarChart3, Calendar, Star } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -65,7 +65,7 @@ export default function AboutPage() {
             className="text-center space-y-5"
           >
             <p className="text-gold text-[13px] tracking-[0.2em] uppercase font-medium">
-              Passion & savoir-faire
+              L&apos;excellence au service de la réussite
             </p>
             <motion.h1
               initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
@@ -73,7 +73,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.15 }}
               className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground"
             >
-              À Propos d&apos;Emmy
+              À Propos d&apos;Emmy Cils
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -81,8 +81,9 @@ export default function AboutPage() {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed"
             >
-              Découvrez mon parcours, ma passion pour l'art des extensions de
-              cils et ma mission de sublimer votre regard
+              Centre d&apos;excellence spécialisé dans les extensions de cils et la formation
+              professionnelle. Ma mission&nbsp;: former des experts avec créativité et précision,
+              et sublimer votre regard.
             </motion.p>
             <LashDivider className="pt-2" />
           </motion.div>
@@ -150,7 +151,7 @@ export default function AboutPage() {
                   className="h-px bg-gold"
                 />
                 <p className="text-gold text-[13px] tracking-[0.15em] uppercase font-medium">
-                  Mon histoire
+                  Mon parcours
                 </p>
               </motion.div>
 
@@ -161,34 +162,286 @@ export default function AboutPage() {
                 transition={{ duration: 0.7, delay: 0.15 }}
                 className="font-playfair text-3xl sm:text-4xl text-foreground leading-snug"
               >
-                <CountUp end={8} duration={1.5} /> ans de passion au service de votre <em className="italic text-gold">beauté</em>
+                <CountUp end={10} duration={1.5} /> ans de passion au service de votre <em className="italic text-gold">beauté</em>
               </motion.h2>
 
               <div className="space-y-5 text-muted-foreground leading-relaxed">
                 <LineReveal delay={0.1}>
                   <p>
-                    J'ai découvert ma passion pour les extensions de cils il y a 8 ans.
-                    Ce qui a commencé comme un simple intérêt s'est transformé en une
-                    véritable vocation. Chaque jour, je suis heureuse de pouvoir offrir
-                    à mes clientes une expérience de qualité et personnalisée.
+                    Je me suis spécialisée dans les extensions de cils depuis 2015.
+                    Une expertise approfondie grâce à plus de 15 formations auprès des meilleurs
+                    formateurs internationaux, notamment russes. Ce parcours me permet de
+                    maîtriser toutes les techniques d&apos;extensions de cils, des plus simples
+                    aux plus complexes.
                   </p>
                 </LineReveal>
                 <LineReveal delay={0.2}>
                   <p>
                     Formée aux meilleures techniques internationales, je suis certifiée
-                    dans plusieurs styles d'extensions&nbsp;: cil à cil, volume russe, mega
-                    volume et bien d'autres. Je m'engage à offrir le meilleur service
+                    dans plusieurs styles d&apos;extensions&nbsp;: cil à cil, volume russe, mega
+                    volume et bien d&apos;autres. Je m&apos;engage à offrir le meilleur service
                     à chaque cliente.
                   </p>
                 </LineReveal>
                 <LineReveal delay={0.3}>
                   <p>
                     Mon objectif est simple&nbsp;: vous faire sentir belle et confiante.
-                    Chaque paire de cils est une œuvre d'art unique, adaptée à votre
+                    Chaque paire de cils est une œuvre d&apos;art unique, adaptée à votre
                     type de regard et vos envies.
                   </p>
                 </LineReveal>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mon expertise */}
+      <section className="py-12 sm:py-16 lg:py-24 px-6 lg:px-8 bg-warm">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 sm:mb-16">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-gold text-[13px] tracking-[0.2em] uppercase mb-4 font-medium"
+            >
+              Ce qui me distingue
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-playfair text-3xl sm:text-4xl text-foreground"
+            >
+              Mon <em className="italic text-gold">expertise</em>
+            </motion.h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+              Une passion unique pour l&apos;art des cils qui se traduit au quotidien
+            </p>
+            <LashDivider className="mt-6" />
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-6 lg:gap-8">
+            {[
+              'Une large gamme de poses d\'extensions de cils pour répondre à tous les styles',
+              'La maîtrise des techniques applicables à chaque cil naturel',
+              'La préservation de l\'intégrité des cils de chaque cliente',
+              'Une réponse sur mesure aux besoins spécifiques de chacune',
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <Card className="card-lift p-5 sm:p-6 bg-white border border-border h-full flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                    <Gem size={18} className="text-gold" />
+                  </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed pt-1">
+                    {item}
+                  </p>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Expérience et reconnaissance */}
+      <section className="py-12 sm:py-16 lg:py-24 px-6 lg:px-8 bg-cream">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 sm:mb-16">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-gold text-[13px] tracking-[0.2em] uppercase mb-4 font-medium"
+            >
+              Événements & rayonnement
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-playfair text-3xl sm:text-4xl text-foreground"
+            >
+              Expérience et <em className="italic text-gold">reconnaissance</em>
+            </motion.h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+              Plus de 5 ans d&apos;expérience et une participation à des événements prestigieux
+            </p>
+            <LashDivider className="mt-6" />
+          </div>
+
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <Card className="card-lift p-6 sm:p-8 bg-warm border border-border">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                    <Calendar size={22} className="text-gold" />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair font-semibold text-lg text-foreground mb-2">
+                      Congrès International d&apos;Esthétique & Spa 2023
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">
+                      Participation à la 52<sup>e</sup> édition de cet événement majeur, du 17 au 20 février 2023
+                      à Paris Expo – Porte de Versailles. Plus de 25&nbsp;000 professionnels réunis pour
+                      échanger sur les dernières tendances et innovations.
+                    </p>
+                    <p className="text-gold text-xs tracking-[0.12em] uppercase font-medium">
+                      Paris Expo · Porte de Versailles
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <Card className="card-lift p-6 sm:p-8 bg-warm border border-border">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center flex-shrink-0">
+                    <Sparkles size={22} className="text-gold" />
+                  </div>
+                  <div>
+                    <h3 className="font-playfair font-semibold text-lg text-foreground mb-2">
+                      Collaboration du Beauty Café – 2022
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">
+                      Au Beauty Café à Concarneau, un espace dédié au bien-être qui offre une expérience
+                      unique, réunissant des experts et professionnels autour d&apos;un concept innovant.
+                    </p>
+                    <p className="text-gold text-xs tracking-[0.12em] uppercase font-medium">
+                      Concarneau
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission de formation & Résultats concrets */}
+      <section className="py-12 sm:py-16 lg:py-24 px-6 lg:px-8 bg-warm">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 sm:mb-16">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-gold text-[13px] tracking-[0.2em] uppercase mb-4 font-medium"
+            >
+              Transmission & accompagnement
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-playfair text-3xl sm:text-4xl text-foreground"
+            >
+              Notre mission de <em className="italic text-gold">formation</em>
+            </motion.h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed">
+              Une passion pour la transmission des connaissances&nbsp;: programmes sur mesure et
+              accompagnements personnalisés pour guider chaque apprenti vers l&apos;excellence,
+              l&apos;accroissement de sa clientèle et une vraie différenciation.
+            </p>
+            <LashDivider className="mt-6" />
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-6 lg:gap-8 mb-16">
+            {[
+              { value: 200, suffix: '+', label: 'Professionnelles formées depuis 2020', icon: GraduationCap },
+              { value: 98, suffix: '%', label: 'Satisfaction des stagiaires', icon: Heart },
+              { value: 85, suffix: '%', label: 'Anciennes stagiaires ont lancé leur activité avec succès', icon: BarChart3 },
+            ].map((stat, i) => {
+              const StatIcon = stat.icon
+              return (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <Card className="card-lift p-6 sm:p-8 bg-white border border-border text-center h-full">
+                  <div className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center mx-auto mb-4">
+                    <StatIcon size={22} className="text-gold" />
+                  </div>
+                  <p className="font-playfair text-3xl sm:text-4xl text-gold font-semibold mb-2">
+                    <CountUp end={stat.value} duration={1.5} />{stat.suffix}
+                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {stat.label}
+                  </p>
+                </Card>
+              </motion.div>
+              )
+            })}
+          </div>
+
+          <div className="text-center">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-gold text-[13px] tracking-[0.2em] uppercase mb-4 font-medium"
+            >
+              Méthode pédagogique
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-playfair text-3xl sm:text-4xl text-foreground mb-6"
+            >
+              Notre approche <em className="italic text-gold">unique</em>
+            </motion.h2>
+            <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-8">
+              Chez Emmy Cils, nous croyons en une approche sur mesure, permettant à chacun d&apos;acquérir
+              les clés de la réussite à son propre rythme. La méthode pédagogique &quot;STAR&quot;&nbsp;—
+              Savoir, Technique, Application, Réussite — garantit une progression optimale.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                'Cours théoriques interactifs',
+                'Démonstrations en temps réel',
+                'Pratique intensive sur modèles',
+                'Suivi personnalisé post-formation',
+              ].map((item, i) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="flex items-center gap-3"
+                >
+                  <Star size={16} className="text-gold flex-shrink-0" />
+                  <span className="text-muted-foreground text-sm">{item}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
@@ -503,7 +756,7 @@ export default function AboutPage() {
                 </motion.div>
               ))}
             </div>
-            <span><CountUp end={8} duration={1.5} /> ans d&apos;expertise · Certifiée</span>
+            <span><CountUp end={10} duration={1.5} /> ans d&apos;expertise · Certifiée</span>
           </motion.div>
         </motion.div>
       </section>

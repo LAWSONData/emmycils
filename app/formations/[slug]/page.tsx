@@ -136,7 +136,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
   const [loading, setLoading] = useState(false)
 
   const handleCheckout = async () => {
-    if (!email || !firstName || !lastName || !formation) return
+    if (!email || !firstName || !lastName || !phone || !formation) return
 
     setLoading(true)
     try {
@@ -327,7 +327,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter' && email && firstName && lastName) handleCheckout()
+                        if (e.key === 'Enter' && email && firstName && lastName && phone) handleCheckout()
                       }}
                       className="h-11 border-border focus:border-gold focus:ring-gold/20 rounded-lg"
                     />
@@ -339,7 +339,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
                         htmlFor="detail-phone"
                         className="text-sm font-medium text-foreground"
                       >
-                        Téléphone (optionnel)
+                        Téléphone
                       </label>
                       <Input
                         id="detail-phone"
@@ -369,7 +369,7 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
 
                   <Button
                     onClick={handleCheckout}
-                    disabled={!email || !firstName || !lastName || loading}
+                    disabled={!email || !firstName || !lastName || !phone || loading}
                     className="cta-shimmer w-full bg-gold hover:bg-gold-dark text-white h-11 sm:h-12 text-[13px] sm:text-sm tracking-[0.06em] uppercase rounded-full transition-all duration-300 hover:shadow-[0_4px_25px_rgba(200,169,126,0.45)] font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? (

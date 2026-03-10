@@ -206,7 +206,7 @@ export default function FormationsEnLignePage() {
 
         {/* Content */}
         <motion.div style={{ opacity: heroOpacity }} className="relative z-10 w-full px-6 lg:px-8 py-32">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-3xl">
               {/* Badge */}
               <motion.div
@@ -270,6 +270,77 @@ export default function FormationsEnLignePage() {
                   </div>
                 ))}
               </motion.div>
+            </div>
+
+            {/* Visuel à droite */}
+            <div className="hidden lg:block">
+              <div className="relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-md p-6">
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-gold/10 via-transparent to-purple-500/10" />
+
+                {/* Écran principal */}
+                <div className="relative rounded-2xl bg-black/80 border border-white/15 p-5 shadow-[0_18px_45px_rgba(0,0,0,0.6)]">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-red-400" />
+                      <span className="w-2 h-2 rounded-full bg-amber-300" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.18em] text-white/40">
+                      Plateforme de formation
+                    </span>
+                  </div>
+
+                  <div className="aspect-video rounded-xl border border-white/10 bg-gradient-to-br from-gold/20 via-gold/5 to-purple-500/20 flex flex-col justify-between p-5">
+                    <div className="space-y-2">
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-white/60 flex items-center gap-2">
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/40 border border-white/15">
+                          <Play size={10} className="text-gold" />
+                        </span>
+                        Module vidéo
+                      </p>
+                      <p className="font-playfair text-lg text-white">
+                        Première leçon — Pose classique
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px] text-white/60">
+                      <span>Durée totale · {mainFormation.duration}</span>
+                      <span className="inline-flex items-center gap-1">
+                        <Headphones size={12} className="text-gold" />
+                        Audio HD
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Barre de progression */}
+                  <div className="mt-4 space-y-2">
+                    <div className="flex justify-between text-[11px] text-white/50">
+                      <span>Votre progression</span>
+                      <span>3 / {mainFormation.modulesCount} modules</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+                      <div className="h-full w-1/3 bg-gradient-to-r from-gold via-gold-light to-emerald-300 rounded-full" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Cartes secondaires */}
+                <div className="mt-4 grid grid-cols-2 gap-3 text-[11px] text-white/70">
+                  <div className="rounded-2xl bg-black/60 border border-white/10 p-3 flex items-center gap-2">
+                    <Download size={14} className="text-gold" />
+                    <div>
+                      <p className="font-medium">PDF téléchargeables</p>
+                      <p className="text-white/40">Fiches récap et protocoles</p>
+                    </div>
+                  </div>
+                  <div className="rounded-2xl bg-black/60 border border-white/10 p-3 flex items-center gap-2">
+                    <Wifi size={14} className="text-gold" />
+                    <div>
+                      <p className="font-medium">Accès 24h/24</p>
+                      <p className="text-white/40">Depuis tous vos écrans</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

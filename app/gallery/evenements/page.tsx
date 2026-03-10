@@ -17,6 +17,20 @@ const galleryItems = [
   { id: 4, title: 'Workshop Tendances', category: 'Masterclass', date: 'Décembre 2023', src: '/gallery/04-wet-look.jpg' },
   { id: 5, title: 'Journée Portes Ouvertes', category: 'Salon', date: 'Novembre 2023', src: '/gallery/05-fox-eye.jpg' },
   { id: 6, title: 'Anniversaire du Salon', category: 'Cérémonie', date: 'Octobre 2023', src: '/gallery/06-hollywood.jpg' },
+  {
+    id: 7,
+    title: "Congrès International d'Esthétique & Spa",
+    category: 'Salon',
+    date: 'Février 2023 · Paris Expo – Porte de Versailles',
+    src: '/gallery/evenement-congres-2023.png',
+  },
+  {
+    id: 8,
+    title: 'Collaboration Beauty Café',
+    category: 'Cérémonie',
+    date: '2022 · Concarneau',
+    src: '/gallery/evenement-beauty-cafe-2022.png',
+  },
 ]
 
 const filters = ['Tous', 'Salon', 'Masterclass', 'Cérémonie']

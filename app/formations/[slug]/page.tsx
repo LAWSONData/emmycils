@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState } from 'react'
+import { use, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Navbar } from '@/components/navbar'
@@ -392,6 +392,68 @@ export default function FormationDetailPage({ params }: FormationDetailPageProps
               </div>
             </div>
           </section>
+
+          {/* Galerie Pose Classique - Carrousel automatique */}
+          {slug === 'technique-niveau-2' && (
+            <section className="space-y-6">
+              <div className="space-y-2">
+                <p className="text-gold text-xs uppercase tracking-[0.2em] font-semibold">
+                  Exemples de réalisations
+                </p>
+                <h3 className="font-playfair text-2xl sm:text-3xl text-foreground">
+                  Pose classique — Résultats
+                </h3>
+                <p className="text-muted-foreground text-sm max-w-2xl">
+                  Voici des exemples de poses classiques réalisées avec la technique enseignée dans cette formation. Un résultat naturel, élégant et durable.
+                </p>
+              </div>
+
+              {/* Carrousel infini */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <div
+                  className="flex animate-scroll-gallery"
+                  style={{
+                    width: 'max-content',
+                  }}
+                >
+                  {/* Images dupliquées pour l'effet infini */}
+                  {[...Array(3)].map((_, setIndex) => (
+                    <div key={setIndex} className="flex gap-4 px-2">
+                      {[
+                        { src: '/pose-classique-1.jpeg', alt: 'Pose classique naturelle' },
+                        { src: '/pose-classique-2.jpeg', alt: 'Pose classique élégante' },
+                        { src: '/pose-classique-3.jpeg', alt: 'Pose classique effet naturel' },
+                        { src: '/pose-classique-4.jpeg', alt: 'Pose classique harmonieuse' },
+                        { src: '/pose-classique-5.jpeg', alt: 'Pose classique professionnelle' },
+                      ].map((img, index) => (
+                        <div
+                          key={`${setIndex}-${index}`}
+                          className="relative w-[200px] sm:w-[240px] md:w-[280px] aspect-[3/4] rounded-2xl overflow-hidden bg-[#0a0a0a] flex-shrink-0 group"
+                        >
+                          <Image
+                            src={img.src}
+                            alt={img.alt}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                          <div className="absolute bottom-3 left-3 right-3">
+                            <p className="text-white text-xs sm:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              {img.alt}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Dégradés sur les côtés */}
+                <div className="absolute inset-y-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-cream to-transparent pointer-events-none z-10" />
+                <div className="absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-cream to-transparent pointer-events-none z-10" />
+              </div>
+            </section>
+          )}
 
           {/* Navigation de sections */}
           <section className="bg-cream/80 backdrop-blur border-y border-border/60 py-3 rounded-2xl">

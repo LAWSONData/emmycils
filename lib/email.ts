@@ -1,13 +1,20 @@
 import nodemailer from 'nodemailer'
 import type { Formation } from './formations'
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-})
+/**
+ * Crée le transporter de manière lazy pour s'assurer que les variables d'environnement sont chargées
+ */
+function getTransporter() {
+  return nodemailer.createTransport({
+    host: 'smtp.hostinger.com',
+    port: 465,
+    secure: true, // SSL
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  })
+}
 
 /**
  * Email envoyé après achat avec le lien d'accès à la formation
@@ -130,7 +137,7 @@ export async function sendFormationAccessEmail({
                 © 2026 Emmy Cils — Extensions de cils professionnelles
               </p>
               <p style="font-size:12px;color:rgba(255,255,255,0.25);margin:0;">
-                Besoin d'aide ? Contactez-nous à <a href="mailto:contact@emmycils.fr" style="color:#c8a97e;text-decoration:none;">contact@emmycils.fr</a>
+                Besoin d'aide ? Contactez-nous à <a href="mailto:contact@emmy-cils.fr" style="color:#c8a97e;text-decoration:none;">contact@emmy-cils.fr</a>
               </p>
             </td>
           </tr>
@@ -142,8 +149,10 @@ export async function sendFormationAccessEmail({
 </body>
 </html>`
 
+  const transporter = getTransporter()
+
   await transporter.sendMail({
-    from: `"Emmy Cils Formations" <${process.env.GMAIL_USER}>`,
+    from: `"Emmy Cils Formations" <${process.env.SMTP_USER}>`,
     to,
     subject: `Accès à votre formation : ${formation.title} — Emmy Cils`,
     html,

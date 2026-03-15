@@ -24,49 +24,50 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { GoldenParticles, LashDivider } from '@/components/animations'
 import { formations } from '@/lib/formations'
 
-const formationTypes = [
-  {
-    id: 'en-ligne',
-    title: 'En Ligne',
-    subtitle: 'Apprenez à votre rythme',
-    description: 'Formations 100% digitales accessibles 24h/24. Vidéos HD, supports PDF et accès illimité.',
-    icon: Monitor,
-    href: '/formations/en-ligne',
-    color: 'from-emerald-500/20 to-emerald-500/5',
-    borderColor: 'border-emerald-500/30',
-    iconBg: 'bg-emerald-500/10',
-    features: ['Accès instantané', 'Vidéos HD', 'Support PDF'],
-  },
-  {
-    id: 'presentiel',
-    title: 'Présentiel',
-    subtitle: 'Formation immersive',
-    description: 'Sessions en petit groupe dans notre salon. Pratique sur modèle et accompagnement personnalisé.',
-    icon: MapPin,
-    href: '/formations/presentiel',
-    color: 'from-gold/20 to-gold/5',
-    borderColor: 'border-gold/30',
-    iconBg: 'bg-gold/10',
-    features: ['4 élèves max', 'Pratique réelle', 'Kit inclus'],
-  },
-  {
-    id: 'elite',
-    title: 'Programme Elite',
-    subtitle: 'Pour aller plus loin',
-    description: 'Accédez à la formation avancée et préparez-vous aux futurs modules Elite exclusifs.',
-    icon: Crown,
-    href: '/formations/elite',
-    color: 'from-purple-500/20 to-purple-500/5',
-    borderColor: 'border-purple-500/30',
-    iconBg: 'bg-purple-500/10',
-    features: ['Niveau avancé', 'Certificat', 'Communauté'],
-  },
-]
+// Types de formations - Cachés temporairement
+// const formationTypes = [
+//   {
+//     id: 'en-ligne',
+//     title: 'En Ligne',
+//     subtitle: 'Apprenez à votre rythme',
+//     description: 'Formations 100% digitales accessibles 24h/24. Vidéos HD, supports PDF et accès illimité.',
+//     icon: Monitor,
+//     href: '/formations/en-ligne',
+//     color: 'from-emerald-500/20 to-emerald-500/5',
+//     borderColor: 'border-emerald-500/30',
+//     iconBg: 'bg-emerald-500/10',
+//     features: ['Accès instantané', 'Vidéos HD', 'Support PDF'],
+//   },
+//   {
+//     id: 'presentiel',
+//     title: 'Présentiel',
+//     subtitle: 'Formation immersive',
+//     description: 'Sessions en petit groupe dans notre salon. Pratique sur modèle et accompagnement personnalisé.',
+//     icon: MapPin,
+//     href: '/formations/presentiel',
+//     color: 'from-gold/20 to-gold/5',
+//     borderColor: 'border-gold/30',
+//     iconBg: 'bg-gold/10',
+//     features: ['4 élèves max', 'Pratique réelle', 'Kit inclus'],
+//   },
+//   {
+//     id: 'elite',
+//     title: 'Programme Elite',
+//     subtitle: 'Pour aller plus loin',
+//     description: 'Accédez à la formation avancée et préparez-vous aux futurs modules Elite exclusifs.',
+//     icon: Crown,
+//     href: '/formations/elite',
+//     color: 'from-purple-500/20 to-purple-500/5',
+//     borderColor: 'border-purple-500/30',
+//     iconBg: 'bg-purple-500/10',
+//     features: ['Niveau avancé', 'Certificat', 'Communauté'],
+//   },
+// ]
 
 const stats = [
   { value: '100+', label: 'Élèves formées', icon: Users },
   { value: '4.9', label: 'Note moyenne', icon: Star },
-  { value: '6', label: 'Formations', icon: BookOpen },
+  { value: '22', label: 'Vidéos HD', icon: BookOpen },
 ]
 
 export default function FormationsPage() {
@@ -237,78 +238,50 @@ export default function FormationsPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 text-gold text-xs tracking-[0.15em] uppercase mb-6">
               <Sparkles size={12} />
               Nos programmes
             </span>
             <h2 className="font-playfair text-4xl sm:text-5xl text-foreground mb-4">
-              Choisissez votre <span className="italic text-gold">parcours</span>
+              Nouveaux <span className="italic text-gold">modules</span>
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Trois formats adaptés à vos besoins et votre disponibilité
+            <p className="text-muted-foreground max-w-xl mx-auto mb-12">
+              De nouvelles formations arrivent très prochainement
             </p>
-          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {formationTypes.map((type, i) => (
-              <motion.div
-                key={type.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ delay: i * 0.15 }}
-              >
-                <Link href={type.href} className="group block h-full">
-                  <div className="relative h-full rounded-3xl overflow-hidden bg-white border border-border hover:border-gold/30 hover:shadow-[0_20px_60px_rgba(200,169,126,0.15)] transition-all duration-500">
-                    {/* Gradient background */}
-                    <div className={`absolute top-0 inset-x-0 h-40 bg-gradient-to-b ${type.color} to-transparent opacity-60`} />
+            {/* Message Bientôt disponibles */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="max-w-2xl mx-auto"
+            >
+              <div className="relative rounded-3xl overflow-hidden bg-white border-2 border-dashed border-gold/30 p-12">
+                <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-gold/10 to-transparent" />
 
-                    <div className="relative p-8 space-y-6">
-                      {/* Icon */}
-                      <div className={`w-16 h-16 rounded-2xl ${type.iconBg} border ${type.borderColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
-                        <type.icon size={28} className="text-gold" />
-                      </div>
-
-                      {/* Content */}
-                      <div>
-                        <h3 className="font-playfair text-2xl text-foreground mb-1 group-hover:text-gold transition-colors">
-                          {type.title}
-                        </h3>
-                        <p className="text-gold text-sm italic mb-4">{type.subtitle}</p>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {type.description}
-                        </p>
-                      </div>
-
-                      {/* Features */}
-                      <div className="space-y-2">
-                        {type.features.map((feature) => (
-                          <div key={feature} className="flex items-center gap-2">
-                            <CheckCircle size={14} className="text-gold" />
-                            <span className="text-sm text-muted-foreground">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* CTA */}
-                      <div className="pt-4 border-t border-border">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-foreground">
-                            Découvrir
-                          </span>
-                          <div className="w-10 h-10 rounded-full bg-foreground group-hover:bg-gold flex items-center justify-center transition-colors">
-                            <ArrowRight size={16} className="text-white" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                <div className="relative text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                    <Sparkles size={32} className="text-gold" />
                   </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+
+                  <h3 className="font-playfair text-3xl text-foreground mb-4">
+                    Bientôt disponibles
+                  </h3>
+
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    Nous préparons de nouvelles formations exclusives pour vous accompagner dans votre développement professionnel.
+                  </p>
+
+                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold/10 text-gold text-sm font-medium">
+                    <Clock size={16} />
+                    Nouveaux modules en préparation
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 

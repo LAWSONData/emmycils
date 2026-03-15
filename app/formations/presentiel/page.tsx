@@ -21,56 +21,72 @@ import {
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { GoldenParticles } from '@/components/animations'
 
-const formationsPresentiel = [
-  {
-    id: 1,
-    title: 'Formation Initiation',
-    subtitle: 'Les bases des extensions de cils',
-    description: 'Formation complète pour débutantes. Apprenez les fondamentaux de la pose cil à cil dans un cadre professionnel.',
-    duration: '2 jours',
-    participants: '4 max',
-    price: '590€',
-    popular: false,
-    includes: [
-      'Kit de démarrage offert',
-      'Support de cours complet',
-      'Certificat de formation',
-      'Pratique sur modèle',
-    ],
-  },
-  {
-    id: 2,
-    title: 'Formation Volume Russe',
-    subtitle: 'Maîtrisez les techniques de volume',
-    description: 'Perfectionnez vos compétences avec les techniques de volume russe 2D à 6D.',
-    duration: '2 jours',
-    participants: '4 max',
-    price: '790€',
-    popular: true,
-    includes: [
-      'Kit volume professionnel',
-      'Techniques de bouquets',
-      'Certificat de formation',
-      'Suivi post-formation',
-    ],
-  },
-  {
-    id: 3,
-    title: 'Formation Perfectionnement',
-    subtitle: 'Techniques avancées et créatives',
-    description: 'Pour les professionnelles souhaitant se perfectionner sur les techniques créatives.',
-    duration: '1 jour',
-    participants: '4 max',
-    price: '490€',
-    popular: false,
-    includes: [
-      'Techniques créatives avancées',
-      'Correction des erreurs',
-      'Certificat de perfectionnement',
-      'Accès groupe privé',
-    ],
-  },
-]
+// Type pour les formations présentielles
+type FormationPresentiel = {
+  id: number
+  title: string
+  subtitle: string
+  description: string
+  duration: string
+  participants: string
+  price: string
+  popular: boolean
+  includes: string[]
+}
+
+// Formations présentielles - Cachées temporairement (tableau vide)
+const formationsPresentiel: FormationPresentiel[] = []
+
+// const formationsPresentielOriginal = [
+//   {
+//     id: 1,
+//     title: 'Formation Initiation',
+//     subtitle: 'Les bases des extensions de cils',
+//     description: 'Formation complète pour débutantes. Apprenez les fondamentaux de la pose cil à cil dans un cadre professionnel.',
+//     duration: '2 jours',
+//     participants: '4 max',
+//     price: '590€',
+//     popular: false,
+//     includes: [
+//       'Kit de démarrage offert',
+//       'Support de cours complet',
+//       'Certificat de formation',
+//       'Pratique sur modèle',
+//     ],
+//   },
+//   {
+//     id: 2,
+//     title: 'Formation Volume Russe',
+//     subtitle: 'Maîtrisez les techniques de volume',
+//     description: 'Perfectionnez vos compétences avec les techniques de volume russe 2D à 6D.',
+//     duration: '2 jours',
+//     participants: '4 max',
+//     price: '790€',
+//     popular: true,
+//     includes: [
+//       'Kit volume professionnel',
+//       'Techniques de bouquets',
+//       'Certificat de formation',
+//       'Suivi post-formation',
+//     ],
+//   },
+//   {
+//     id: 3,
+//     title: 'Formation Perfectionnement',
+//     subtitle: 'Techniques avancées et créatives',
+//     description: 'Pour les professionnelles souhaitant se perfectionner sur les techniques créatives.',
+//     duration: '1 jour',
+//     participants: '4 max',
+//     price: '490€',
+//     popular: false,
+//     includes: [
+//       'Techniques créatives avancées',
+//       'Correction des erreurs',
+//       'Certificat de perfectionnement',
+//       'Accès groupe privé',
+//     ],
+//   },
+// ]
 
 const advantages = [
   { icon: Users, title: 'Petits groupes', desc: '4 élèves maximum pour un suivi personnalisé et une attention dédiée' },
@@ -326,15 +342,50 @@ export default function FormationsPresentielPage() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 text-gold text-xs tracking-[0.15em] uppercase mb-6">
               <Calendar size={12} />
-              Prochaines sessions disponibles
+              Prochaines sessions
             </span>
             <h2 className="font-playfair text-4xl sm:text-5xl text-foreground">
-              Choisissez votre <span className="italic text-gold">formation</span>
+              Formations <span className="italic text-gold">en présentiel</span>
             </h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {formationsPresentiel.map((formation, i) => (
+          {/* Message si aucune formation disponible */}
+          {formationsPresentiel.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="max-w-2xl mx-auto"
+            >
+              <div className="relative rounded-3xl overflow-hidden bg-white border-2 border-dashed border-gold/30 p-12">
+                <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-gold/10 to-transparent" />
+
+                <div className="relative text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gold/10 border border-gold/20 flex items-center justify-center">
+                    <Sparkles size={32} className="text-gold" />
+                  </div>
+
+                  <h3 className="font-playfair text-3xl text-foreground mb-4">
+                    Bientôt disponibles
+                  </h3>
+
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    Nous préparons de nouvelles sessions de formations présentielles dans notre salon.
+                    Contactez-nous pour être informé(e) des prochaines dates.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gold/10 text-gold text-sm font-medium">
+                      <Clock size={16} />
+                      Nouvelles sessions en préparation
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ) : (
+            <div className="grid lg:grid-cols-3 gap-8">
+              {formationsPresentiel.map((formation, i) => (
               <motion.div
                 key={formation.id}
                 initial={{ opacity: 0, y: 40 }}
@@ -441,7 +492,8 @@ export default function FormationsPresentielPage() {
                 </div>
               </motion.div>
             ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 

@@ -16,18 +16,19 @@ export function FormationPromo() {
   const pathname = usePathname()
 
   const isFormationsPage = pathname?.startsWith('/formations')
+  const isFormationAccessPage = pathname?.startsWith('/formation/')
 
   const show = useCallback(() => {
-    if (isFormationsPage) return
+    if (isFormationsPage || isFormationAccessPage) return
     setVisible(true)
 
     // Auto-hide après VISIBLE_DURATION
     const hideTimer = setTimeout(() => setVisible(false), VISIBLE_DURATION)
     return hideTimer
-  }, [isFormationsPage])
+  }, [isFormationsPage, isFormationAccessPage])
 
   useEffect(() => {
-    if (isFormationsPage) {
+    if (isFormationsPage || isFormationAccessPage) {
       setVisible(false)
       return
     }
@@ -46,7 +47,7 @@ export function FormationPromo() {
       clearTimeout(firstTimer)
       clearInterval(interval)
     }
-  }, [isFormationsPage, show])
+  }, [isFormationsPage, isFormationAccessPage, show])
 
   const dismiss = () => {
     setVisible(false)
@@ -54,7 +55,7 @@ export function FormationPromo() {
 
   const formation = formations[formations.length - 1]
 
-  if (isFormationsPage) return null
+  if (isFormationsPage || isFormationAccessPage) return null
 
   return (
     <AnimatePresence>

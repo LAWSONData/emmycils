@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 import { getFormationById } from '@/lib/formations'
 import { isValidTokenFormat } from '@/lib/tokens'
 import { FormationContent } from './FormationContent'
+import { DemoAccessWrapper } from './DemoAccessWrapper'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -83,11 +84,14 @@ export default async function FormationAccessPage({ params }: PageProps) {
     notFound()
   }
 
+  const isDemo = accessToken === 'demo'
+
   return (
-    <FormationContent
+    <DemoAccessWrapper
       formation={formation}
       accessToken={accessToken}
       initialProgress={accessData.progress}
+      isDemo={isDemo}
     />
   )
 }

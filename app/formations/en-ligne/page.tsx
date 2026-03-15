@@ -36,60 +36,78 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { GoldenParticles } from '@/components/animations'
 import { formations } from '@/lib/formations'
 
-const formationsEnLigne = [
-  {
-    id: 'online-bases',
-    title: 'Les Bases du Métier',
-    subtitle: 'Formation digitale complète',
-    description: 'Apprenez à votre rythme les fondamentaux des extensions de cils avec des vidéos HD.',
-    duration: '8h de vidéo',
-    modules: 6,
-    price: '290€',
-    priceInCents: 29000,
-    color: 'from-emerald-500/20 to-emerald-500/5',
-    includes: [
-      'Accès illimité aux vidéos',
-      '6 modules progressifs',
-      'Supports PDF téléchargeables',
-      'Groupe privé d\'entraide',
-    ],
-  },
-  {
-    id: 'online-volume',
-    title: 'Volume Russe Online',
-    subtitle: 'Perfectionnement à distance',
-    description: 'Maîtrisez les techniques de volume depuis chez vous avec des tutoriels détaillés.',
-    duration: '12h de vidéo',
-    modules: 8,
-    price: '390€',
-    priceInCents: 39000,
-    popular: true,
-    color: 'from-gold/30 to-gold/5',
-    includes: [
-      'Accès illimité aux vidéos',
-      '8 modules techniques',
-      'Exercices pratiques guidés',
-      'Corrections personnalisées',
-    ],
-  },
-  {
-    id: 'online-business',
-    title: 'Business & Marketing',
-    subtitle: 'Développez votre activité',
-    description: 'Tout pour lancer et développer votre activité de lash artist.',
-    duration: '6h de vidéo',
-    modules: 5,
-    price: '190€',
-    priceInCents: 19000,
-    color: 'from-purple-500/20 to-purple-500/5',
-    includes: [
-      'Stratégies marketing éprouvées',
-      'Templates réseaux sociaux',
-      'Guide de tarification',
-      'Modèles de contrats',
-    ],
-  },
-]
+// Type pour les formations secondaires
+type FormationSecondaire = {
+  id: string
+  title: string
+  subtitle: string
+  description: string
+  duration: string
+  modules: number
+  price: string
+  priceInCents: number
+  popular?: boolean
+  color: string
+  includes: string[]
+}
+
+// Formations secondaires - Cachées temporairement (tableau vide pour ne rien afficher)
+const formationsEnLigne: FormationSecondaire[] = []
+
+// const formationsEnLigneOriginal = [
+//   {
+//     id: 'online-bases',
+//     title: 'Les Bases du Métier',
+//     subtitle: 'Formation digitale complète',
+//     description: 'Apprenez à votre rythme les fondamentaux des extensions de cils avec des vidéos HD.',
+//     duration: '8h de vidéo',
+//     modules: 6,
+//     price: '290€',
+//     priceInCents: 29000,
+//     color: 'from-emerald-500/20 to-emerald-500/5',
+//     includes: [
+//       'Accès illimité aux vidéos',
+//       '6 modules progressifs',
+//       'Supports PDF téléchargeables',
+//       'Groupe privé d\'entraide',
+//     ],
+//   },
+//   {
+//     id: 'online-volume',
+//     title: 'Volume Russe Online',
+//     subtitle: 'Perfectionnement à distance',
+//     description: 'Maîtrisez les techniques de volume depuis chez vous avec des tutoriels détaillés.',
+//     duration: '12h de vidéo',
+//     modules: 8,
+//     price: '390€',
+//     priceInCents: 39000,
+//     popular: true,
+//     color: 'from-gold/30 to-gold/5',
+//     includes: [
+//       'Accès illimité aux vidéos',
+//       '8 modules techniques',
+//       'Exercices pratiques guidés',
+//       'Corrections personnalisées',
+//     ],
+//   },
+//   {
+//     id: 'online-business',
+//     title: 'Business & Marketing',
+//     subtitle: 'Développez votre activité',
+//     description: 'Tout pour lancer et développer votre activité de lash artist.',
+//     duration: '6h de vidéo',
+//     modules: 5,
+//     price: '190€',
+//     priceInCents: 19000,
+//     color: 'from-purple-500/20 to-purple-500/5',
+//     includes: [
+//       'Stratégies marketing éprouvées',
+//       'Templates réseaux sociaux',
+//       'Guide de tarification',
+//       'Modèles de contrats',
+//     ],
+//   },
+// ]
 
 const advantages = [
   { icon: Clock, title: 'À votre rythme', desc: 'Apprenez quand vous voulez, où vous voulez, sans contrainte horaire' },
@@ -99,7 +117,7 @@ const advantages = [
 ]
 
 export default function FormationsEnLignePage() {
-  const [selectedFormation, setSelectedFormation] = useState<typeof formationsEnLigne[0] | null>(null)
+  const [selectedFormation, setSelectedFormation] = useState<FormationSecondaire | null>(null)
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -116,7 +134,7 @@ export default function FormationsEnLignePage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
 
-  const handleBuy = (formation: typeof formationsEnLigne[0]) => {
+  const handleBuy = (formation: FormationSecondaire) => {
     setSelectedFormation(formation)
     setEmail('')
     setDialogOpen(true)
@@ -462,7 +480,7 @@ export default function FormationsEnLignePage() {
             </div>
           </motion.div>
 
-          {/* Autres parcours en ligne (teasing / à venir) */}
+          {/* Autres parcours en ligne - Cachés temporairement (tableau vide) */}
           <div className="grid lg:grid-cols-3 gap-8">
             {formationsEnLigne.map((formation, i) => (
               <motion.div
